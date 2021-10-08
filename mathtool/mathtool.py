@@ -56,7 +56,9 @@ from enumerate_input import enumerate_input
 from retry_on_exception import retry_on_exception
 
 
-def sort_versions(versions, verbose=False):
+def sort_versions(versions,
+                  verbose: bool = False,
+                  ):
     if verbose:
         ic(versions)
     versions.sort(key=lambda s: list(map(int, s.split('.'))), reverse=True)
@@ -65,14 +67,14 @@ def sort_versions(versions, verbose=False):
     return versions
 
 
-def percent_of_total(*, part, total, verbose=False):
+def percent_of_total(*, part, total, verbose: bool = False):
     if verbose:
         ic(part, total)
     result = (part / total) * 100
     return result
 
 
-def percent_difference(a, b, verbose=False):
+def percent_difference(a, b, verbose: bool = False):
     percent_total = percent_of_total(part=min(a, b), total=max(a, b), verbose=verbose)
     if verbose:
         ic(percent_total)
