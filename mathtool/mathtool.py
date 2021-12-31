@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
 
-# flake8: noqa           # flake8 has no per file settings :(
 # pylint: disable=C0111  # docstrings are always outdated and wrong
 # pylint: disable=C0114  #      Missing module docstring (missing-module-docstring)
 # pylint: disable=W0511  # todo is encouraged
@@ -23,21 +22,22 @@
 # pylint: disable=C0413  # TEMP isort issue [wrong-import-position] Import "from pathlib import Path" should be placed at the top of the module [C0413]
 
 import os
-import sys
-import time
+#import sys
+#import time
 from signal import SIG_DFL
 from signal import SIGPIPE
 from signal import signal
 
 import click
-import sh
+
+#import sh
 
 signal(SIGPIPE, SIG_DFL)
 import binascii
 import collections
 from decimal import Decimal
 from decimal import getcontext
-from pathlib import Path
+#from pathlib import Path
 from typing import ByteString
 from typing import Generator
 from typing import Iterable
@@ -47,13 +47,12 @@ from typing import Sequence
 from typing import Tuple
 from typing import Union
 
-from asserttool import eprint
+#from asserttool import eprint
 from asserttool import ic
 from asserttool import nevd
-from asserttool import validate_slice
-from asserttool import verify
-from enumerate_input import enumerate_input
-from retry_on_exception import retry_on_exception
+
+#from asserttool import validate_slice
+#from retry_on_exception import retry_on_exception
 
 
 def sort_versions(versions,
@@ -179,23 +178,7 @@ def get_random_hex_digits(count):
     assert len(ans) == count
     return ans.decode('UTF8')
 
-#@click.group()
-#@click.option('--verbose', is_flag=True)
-#@click.option('--debug', is_flag=True)
-#@click.pass_context
-#def cli(ctx,
-#        verbose: bool,
-#        debug: bool,
-#        ):
-#
-#    null, end, verbose, debug = nevd(ctx=ctx,
-#                                     printn=False,
-#                                     ipython=False,
-#                                     verbose=verbose,
-#                                     debug=debug,)
 
-
-# update setup.py if changing function name
 @click.command()
 @click.option('--verbose', is_flag=True)
 @click.option('--debug', is_flag=True)
@@ -210,5 +193,4 @@ def cli(ctx,
                                      ipython=False,
                                      verbose=verbose,
                                      debug=debug,)
-
 
