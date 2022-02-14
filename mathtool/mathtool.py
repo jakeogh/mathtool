@@ -26,14 +26,15 @@ import collections
 import os
 from decimal import Decimal
 from decimal import getcontext
+from typing import List
 from typing import Sequence
 from typing import Union
 
 from asserttool import ic
 
 
-def sort_versions(*,
-                  versions: Sequence,
+def sort_versions(versions: List[str],
+                  *,
                   verbose: Union[bool, int, float],
                   ) -> Sequence:
     if verbose:
@@ -147,12 +148,12 @@ def dollar_string_to_decimal(string: str):
     return number
 
 
-def get_random_hex_bytes(count):
+def get_random_hex_bytes(count: int) -> bytes:
     assert isinstance(count, int)
     return binascii.hexlify(os.urandom(count))
 
 
-def get_random_hex_digits(count):
+def get_random_hex_digits(count: int) -> str:
     assert isinstance(count, int)
     bytes_needed = count
     if count % 2 != 0:
