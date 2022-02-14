@@ -21,43 +21,21 @@
 # pylint: disable=C0305  # Trailing newlines editor should fix automatically, pointless warning
 # pylint: disable=C0413  # TEMP isort issue [wrong-import-position] Import "from pathlib import Path" should be placed at the top of the module [C0413]
 
-import os
-#import sys
-#import time
-from signal import SIG_DFL
-from signal import SIGPIPE
-from signal import signal
-
-import click
-
-#import sh
-
-signal(SIGPIPE, SIG_DFL)
 import binascii
 import collections
+import os
 from decimal import Decimal
 from decimal import getcontext
-#from pathlib import Path
-from typing import ByteString
-from typing import Generator
-from typing import Iterable
-from typing import List
-from typing import Optional
 from typing import Sequence
-from typing import Tuple
 from typing import Union
 
-#from asserttool import eprint
 from asserttool import ic
-from asserttool import nevd
-
-#from asserttool import validate_slice
-#from retry_on_exception import retry_on_exception
 
 
-def sort_versions(versions,
-                  verbose: bool = False,
-                  ):
+def sort_versions(*,
+                  versions: Sequence,
+                  verbose: Union[bool, int, float],
+                  ) -> Sequence:
     if verbose:
         ic(versions)
     versions.sort(key=lambda s: list(map(int, s.split('.'))), reverse=True)
@@ -66,14 +44,21 @@ def sort_versions(versions,
     return versions
 
 
-def percent_of_total(*, part, total, verbose: bool = False):
+def percent_of_total(*,
+                     part: float,
+                     total: float,
+                     verbose: Union[bool, int, float],
+                     ) -> float:
     if verbose:
         ic(part, total)
     result = (part / total) * 100
     return result
 
 
-def percent_difference(a, b, verbose: bool = False):
+def percent_difference(a,
+                       b,
+                       verbose: Union[bool, int, float],
+                       ) -> float:
     percent_total = percent_of_total(part=min(a, b), total=max(a, b), verbose=verbose)
     if verbose:
         ic(percent_total)
@@ -177,20 +162,3 @@ def get_random_hex_digits(count):
     ans = get_random_hex_bytes(bytes_needed)[0:count]
     assert len(ans) == count
     return ans.decode('UTF8')
-
-
-@click.command()
-@click.option('--verbose', is_flag=True)
-@click.option('--debug', is_flag=True)
-@click.pass_context
-def cli(ctx,
-        verbose: bool,
-        debug: bool,
-        ):
-
-    null, end, verbose, debug = nevd(ctx=ctx,
-                                     printn=False,
-                                     ipython=False,
-                                     verbose=verbose,
-                                     debug=debug,)
-
