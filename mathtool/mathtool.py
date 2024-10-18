@@ -33,14 +33,10 @@ from asserttool import ic
 
 def sort_versions(
     versions: list[str],
-    *,
-    verbose: bool | int | float = False,
 ) -> Sequence:
-    if verbose:
-        ic(versions)
+    ic(versions)
     versions.sort(key=lambda s: list(map(int, s.split("."))), reverse=True)
-    if verbose:
-        ic(versions)
+    ic(versions)
     return versions
 
 
@@ -48,10 +44,8 @@ def percent_of_total(
     *,
     part: float,
     total: float,
-    verbose: bool | int | float = False,
 ) -> float:
-    if verbose:
-        ic(part, total)
+    ic(part, total)
     result = (part / total) * 100
     return result
 
@@ -59,12 +53,12 @@ def percent_of_total(
 def percent_difference(
     a,
     b,
-    verbose: bool | int | float = False,
 ) -> float:
-    percent_total = percent_of_total(part=min(a, b), total=max(a, b), verbose=verbose)
-    if verbose:
-        ic(percent_total)
-
+    percent_total = percent_of_total(
+        part=min(a, b),
+        total=max(a, b),
+    )
+    ic(percent_total)
     result = 100 - abs(percent_total)
     return result
 
